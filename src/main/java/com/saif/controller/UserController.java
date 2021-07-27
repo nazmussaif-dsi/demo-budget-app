@@ -22,12 +22,6 @@ public class UserController {
         return "users/user_list";
     }
 
-    @GetMapping("/add")
-    public String showUserForm(Model model){
-        model.addAttribute("user", new User());
-        return "users/user_form";
-    }
-
     @GetMapping("/{id}")
     public String showUser(@PathVariable("id") Long id, Model model){
         User user = userService.getUserById(id);
@@ -35,9 +29,21 @@ public class UserController {
         return "users/user_details";
     }
 
+    @GetMapping("/add")
+    public String showUserForm(Model model){
+        model.addAttribute("user", new User());
+        return "users/user_form";
+    }
+
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }

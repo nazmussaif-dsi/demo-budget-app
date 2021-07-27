@@ -12,15 +12,19 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User saveUser(User user){
-        return userRepository.saveUser(user);
+    public void saveUser(User user) {
+        userRepository.saveUser(user);
     }
 
-    public User getUserById(Long id){
+    public User getUserById(Long id) {
         return userRepository.getUserById(id);
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.getAllUsers();
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteUser(id);
     }
 }
