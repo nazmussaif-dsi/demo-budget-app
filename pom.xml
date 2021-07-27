@@ -9,6 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>demo-budget-app</name>
+  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,6 +23,13 @@
       <artifactId>spring-webmvc</artifactId>
       <version>4.3.30.RELEASE</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.3.9</version>
+    </dependency>
+
 
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -43,43 +51,36 @@
       <version>1.2</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
       <version>5.3.9</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>5.3.9</version>
     </dependency>
 
-
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.26</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>7.0.1.Final</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>5.5.4.Final</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
