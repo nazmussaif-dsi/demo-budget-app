@@ -14,12 +14,12 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.saif"/>
+    <context:component-scan base-package="com.saif.controller, com.saif.repository, com.saif.service"/>
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/static/"/>
 
-    <tx:annotation-driven transaction-manager="transactionManager" />
+<!--    <tx:annotation-driven transaction-manager="transactionManager" />-->
 
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -27,37 +27,37 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- declare datasource -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/database_budget_app"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
-    </bean>
+<!--    &lt;!&ndash; declare datasource &ndash;&gt;-->
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/database_budget_app"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value=""/>-->
+<!--    </bean>-->
 
-    <!-- spring jdbc template -->
-    <bean id="jdbcTemplate"
-          class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
+<!--    &lt;!&ndash; spring jdbc template &ndash;&gt;-->
+<!--    <bean id="jdbcTemplate"-->
+<!--          class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <property name="dataSource" ref="dataSource"></property>-->
+<!--    </bean>-->
 
-    <!-- set up hibernate session factory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.saif.model"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-            </props>
-        </property>
-    </bean>
+<!--    &lt;!&ndash; set up hibernate session factory &ndash;&gt;-->
+<!--    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--        <property name="packagesToScan" value="com.saif.model"/>-->
+<!--        <property name="hibernateProperties">-->
+<!--            <props>-->
+<!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>-->
+<!--                <prop key="hibernate.show_sql">true</prop>-->
+<!--                <prop key="format_sql">true</prop>-->
+<!--                <prop key="hibernate.hbm2ddl.auto">update</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
 
-    <!-- set up hibernate transaction manager -->
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+<!--    &lt;!&ndash; set up hibernate transaction manager &ndash;&gt;-->
+<!--    <bean id="transactionManager"-->
+<!--          class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+<!--        <property name="sessionFactory" ref="sessionFactory"/>-->
+<!--    </bean>-->
 </beans>

@@ -1,7 +1,6 @@
 package com.saif.service;
 
 import com.saif.model.Expense;
-import com.saif.model.User;
 import com.saif.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
