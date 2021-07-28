@@ -19,11 +19,11 @@ public class Expense {
     private Long id;
     private Date expenseDate;
     private String description;
-    private String location;
+    private Double amount;
 
-    @ManyToOne
-    private Category category;
-
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private Category category;
+//
+//    @ManyToOne
+//    private User user;
 }
