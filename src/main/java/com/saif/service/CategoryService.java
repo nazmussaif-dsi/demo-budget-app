@@ -10,21 +10,25 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
-    private final CategoryRepository categoryRepository;
+  private final CategoryRepository categoryRepository;
 
-    public void saveCategory(Category category) {
-        categoryRepository.saveCategory(category);
-    }
+  public void saveCategory(Category category) {
+    categoryRepository.saveCategory(category);
+  }
 
-    public Category getCategoryById(Long id) {
-        return categoryRepository.getCategoryById(id);
-    }
+  public Category getCategoryById(Long id) {
+    return categoryRepository.getCategoryById(id);
+  }
 
-    public List<Category> getAllCategories() {
-        return categoryRepository.getAllCategories();
-    }
+  public List<Category> getAllCategories() {
+    return categoryRepository.getAllCategories();
+  }
 
-    public void deleteCategory(Long id){
-        categoryRepository.deleteCategory(id);
-    }
+  public void updateCategory(Category category) {
+    categoryRepository.updateCategory(category);
+  }
+
+  public void deleteCategory(Long id) {
+    categoryRepository.deleteCategory(id);
+  }
 }

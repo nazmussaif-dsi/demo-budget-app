@@ -10,21 +10,25 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    public void saveUser(User user) {
-        userRepository.saveUser(user);
-    }
+  public void saveUser(User user) {
+    userRepository.saveUser(user);
+  }
 
-    public User getUserById(Long id) {
-        return userRepository.getUserById(id);
-    }
+  public User getUserById(Long id) {
+    return userRepository.getUserById(id);
+  }
 
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
-    }
+  public List<User> getAllUsers() {
+    return userRepository.getAllUsers();
+  }
 
-    public void deleteUser(Long id){
-        userRepository.deleteUser(id);
-    }
+  public void updateUser(User user) {
+    userRepository.updateUser(user);
+  }
+
+  public void deleteUser(Long id) {
+    userRepository.deleteUser(id);
+  }
 }

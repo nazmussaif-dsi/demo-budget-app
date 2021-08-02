@@ -13,30 +13,36 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/categories")
 public class CategoryController {
-    private final CategoryService categoryService;
+  private final CategoryService categoryService;
 
-    @GetMapping
-    public String showAllCategories(Model model) {
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        return "categories/category_list";
-    }
+  @GetMapping
+  public String showAllCategories(Model model) {
+    List<Category> categories = categoryService.getAllCategories();
+    model.addAttribute("categories", categories);
+    return "categories/category_list";
+  }
 
-    @GetMapping("/add")
-    public String showCategoryForm(Model model){
-        model.addAttribute("category", new Category());
-        return "categories/category_form";
-    }
+  @GetMapping("/add")
+  public String showCategoryForm(Model model) {
+    model.addAttribute("category", new Category());
+    return "categories/category_form";
+  }
 
-    @PostMapping("/add")
-    public String addCategory(@ModelAttribute("category") Category category) {
-        categoryService.saveCategory(category);
-        return "redirect:/categories";
-    }
+  @PostMapping("/add")
+  public String addCategory(@ModelAttribute("category") Category category) {
+    categoryService.saveCategory(category);
+    return "redirect:/categories";
+  }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Long id) {
-        categoryService.deleteCategory(id);
-        return "redirect:/categories";
-    }
+  @PatchMapping("/update")
+  public String updateCategory(@ModelAttribute("category") Category category){
+    categoryService.updateCategory(category);
+    return "redirect:/categories";
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public String deleteCategory(@PathVariable("id") Long id) {
+    categoryService.deleteCategory(id);
+    return "redirect:/categories";
+  }
 }

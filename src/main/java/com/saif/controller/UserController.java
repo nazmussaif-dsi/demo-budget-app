@@ -13,37 +13,43 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/users")
 public class UserController {
-    private final UserService userService;
+  private final UserService userService;
 
-    @GetMapping
-    public String showAllUsers(Model model) {
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
-        return "users/user_list";
-    }
+  @GetMapping
+  public String showAllUsers(Model model) {
+    List<User> users = userService.getAllUsers();
+    model.addAttribute("users", users);
+    return "users/user_list";
+  }
 
-    @GetMapping("/{id}")
-    public String showUser(@PathVariable("id") Long id, Model model){
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "users/user_details";
-    }
+  @GetMapping("/{id}")
+  public String showUser(@PathVariable("id") Long id, Model model) {
+    User user = userService.getUserById(id);
+    model.addAttribute("user", user);
+    return "users/user_details";
+  }
 
-    @GetMapping("/add")
-    public String showUserForm(Model model){
-        model.addAttribute("user", new User());
-        return "users/user_form";
-    }
+  @GetMapping("/add")
+  public String showUserForm(Model model) {
+    model.addAttribute("user", new User());
+    return "users/user_form";
+  }
 
-    @PostMapping("/add")
-    public String addUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/users";
-    }
+  @PostMapping("/add")
+  public String addUser(@ModelAttribute("user") User user) {
+    userService.saveUser(user);
+    return "redirect:/users";
+  }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/users";
-    }
+  @PatchMapping("/update")
+  public String updateUser(@ModelAttribute("user") User user){
+    userService.updateUser(user);
+    return "redirect:/users";
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public String deleteUser(@PathVariable("id") Long id) {
+    userService.deleteUser(id);
+    return "redirect:/users";
+  }
 }

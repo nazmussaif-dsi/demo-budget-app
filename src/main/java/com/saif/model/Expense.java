@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -16,14 +14,15 @@ import java.util.Date;
 @Entity
 public class Expense {
 
-    @Id
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date expenseDate;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private Date expenseDate;
 
-    private String description;
-    private Double amount;
+  private String description;
+  private Double amount;
 
 //    @ManyToOne
 //    private Category category;

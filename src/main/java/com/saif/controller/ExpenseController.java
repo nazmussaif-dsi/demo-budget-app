@@ -22,10 +22,7 @@ public class ExpenseController {
   @GetMapping("/all")
   @ResponseBody
   public List<Expense> getAllExpenses() {
-    System.out.println("SUS");
-    List<Expense> tmp = expenseService.getAllExpenses();
-    System.out.println(tmp);
-    return tmp;
+    return expenseService.getAllExpenses();
   }
 
   @GetMapping("/{id}")
@@ -40,6 +37,13 @@ public class ExpenseController {
   public String addExpense(@ModelAttribute("expense") Expense expense) {
     expenseService.saveExpense(expense);
     return "added";
+  }
+
+  @PostMapping("/update")
+  @ResponseBody
+  public String updateExpense(@ModelAttribute("expense") Expense expense) {
+    expenseService.updateExpense(expense);
+    return "updated";
   }
 
   @DeleteMapping("/delete/{id}")

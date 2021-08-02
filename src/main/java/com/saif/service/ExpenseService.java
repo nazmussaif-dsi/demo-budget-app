@@ -10,21 +10,25 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ExpenseService {
-    private final ExpenseRepository expenseRepository;
+  private final ExpenseRepository expenseRepository;
 
-    public void saveExpense(Expense expense) {
-        expenseRepository.saveExpense(expense);
-    }
+  public void saveExpense(Expense expense) {
+    expenseRepository.saveExpense(expense);
+  }
 
-    public Expense getExpenseById(Long id) {
-        return expenseRepository.getExpenseById(id);
-    }
+  public Expense getExpenseById(Long id) {
+    return expenseRepository.getExpenseById(id);
+  }
 
-    public List<Expense> getAllExpenses() {
-        return expenseRepository.getAllExpenses();
-    }
+  public List<Expense> getAllExpenses() {
+    return expenseRepository.getAllExpenses();
+  }
 
-    public void deleteExpense(Long id){
-        expenseRepository.deleteExpense(id);
-    }
+  public void updateExpense(Expense expense) {
+    expenseRepository.updateExpense(expense);
+  }
+
+  public void deleteExpense(Long id) {
+    expenseRepository.deleteExpense(id);
+  }
 }
