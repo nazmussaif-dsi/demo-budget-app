@@ -3,6 +3,7 @@ package com.saif.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +18,10 @@ public class Expense {
 
     @Id
     private Long id;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expenseDate;
+
     private String description;
     private Double amount;
 

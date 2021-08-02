@@ -4,7 +4,6 @@ import com.saif.model.Expense;
 import com.saif.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,30 +12,40 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/expenses")
 public class ExpenseController {
-    private final ExpenseService expenseService;
+  private final ExpenseService expenseService;
 
-    @GetMapping
-    public String showAllExpenses(Model model){
-        List<Expense> expenses = expenseService.getAllExpenses();
-        model.addAttribute("expenses", expenses);
-        return "expenses/expense_list";
-    }
+  @GetMapping
+  public String showAllExpenses() {
+    return "expenses/deaily_expenses";
+  }
 
-    @GetMapping("/add")
-    public String showExpenseForm(Model model){
-        model.addAttribute("expense", new Expense());
-        return "expenses/expense_form";
-    }
+  @GetMapping("/all")
+  @ResponseBody
+  public List<Expense> getAllExpenses() {
+    System.out.println("SUS");
+    List<Expense> tmp = expenseService.getAllExpenses();
+    System.out.println(tmp);
+    return tmp;
+  }
 
-    @PostMapping("/add")
-    public String addExpense(@ModelAttribute("expense") Expense expense){
-        expenseService.saveExpense(expense);
-        return "redirect:/expenses";
-    }
+  @GetMapping("/{id}")
+  @ResponseBody
+  public Expense getExpense(@PathVariable("id") Long id) {
+    Expense expense = expenseService.getExpenseById(id);
+    return expense;
+  }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteExpense(@PathVariable("id") Long id){
-        expenseService.deleteExpense(id);
-        return "redirect:/expenses";
-    }
+  @PostMapping("/add")
+  @ResponseBody
+  public String addExpense(@ModelAttribute("expense") Expense expense) {
+    expenseService.saveExpense(expense);
+    return "added";
+  }
+
+  @DeleteMapping("/delete/{id}")
+  @ResponseBody
+  public String deleteExpense(@PathVariable("id") Long id) {
+    expenseService.deleteExpense(id);
+    return "deleted";
+  }
 }
