@@ -8,6 +8,7 @@
 <body>
 <div class="container">
   <h1 class="text-center">Category List</h1>
+  <a href="/categories/add" class="btn btn-info" role="button">Add new Category</a>
   <table class="table">
     <thead>
     <tr>
