@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<jsp:include page="../navber.jsp"/>
 <div class="container">
   <h1 class="text-center">User Details</h1>
   <h3>Name: ${user.name}</h3>

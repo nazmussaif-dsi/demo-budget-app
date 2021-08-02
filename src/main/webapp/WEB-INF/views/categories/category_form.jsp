@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<jsp:include page="../navber.jsp"/>
 <div class="container">
   <h1 class="text-center">Add New Category</h1>
   <form:form action="/categories/add" method="post" modelAttribute="category">

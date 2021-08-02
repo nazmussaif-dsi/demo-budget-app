@@ -26,7 +26,7 @@
             $('#expenseForm')[0].reset()
           },
           error: function (err) {
-            alert("error is" + err)
+            alert("error: " + err)
           }
         });
       });
@@ -34,54 +34,54 @@
 
     function getAllRecord() {
       $.ajax({
-            type: "GET",
-            url: "expenses/all",
-            success: function (response) {
-              $('.tr').remove();
-              for (let i = 0; i < response.length; i++) {
-                $("#expenseTable")
-                    .append(
-                        '<tr class="tr">' +
-                        '<td>' + response[i].id + '</td>' +
-                        '<td>' + response[i].expenseDate + '</td>' +
-                        '<td>' + response[i].description + '</td>' +
-                        '<td>' + response[i].amount + '</td>' +
-                        '<td>' +
-                        '<input type="button" class="btn btn-warning" ' +
-                        'onclick="getExpense(' + response[i].id + ')" ' +
-                        'value="Edit">' +
-                        '</td> ' +
-                        '<td>' +
-                        '<input type="button" class="btn btn-danger" ' +
-                        'onclick="deleteExpense(' + response[i].id + ');" value="Delete">' +
-                        '</td> ' +
-                        '</tr>'
-                    );
-              }
-            },
-            error: function (err) {
-              alert("error: " + err)
-            }
-          });
+        type: "GET",
+        url: "expenses/all",
+        success: function (response) {
+          $('.tr').remove();
+          for (let i = 0; i < response.length; i++) {
+            $("#expenseTable")
+                .append(
+                    '<tr class="tr">' +
+                    '<td>' + response[i].id + '</td>' +
+                    '<td>' + response[i].expenseDate + '</td>' +
+                    '<td>' + response[i].description + '</td>' +
+                    '<td>' + response[i].amount + '</td>' +
+                    '<td>' +
+                    '<input type="button" class="btn btn-warning" ' +
+                    'onclick="setExpenseInForm(' + response[i].id + ')" ' +
+                    'value="Edit">' +
+                    '</td> ' +
+                    '<td>' +
+                    '<input type="button" class="btn btn-danger" ' +
+                    'onclick="deleteExpense(' + response[i].id + ');" ' +
+                    'value="Delete">' +
+                    '</td> ' +
+                    '</tr>'
+                );
+          }
+        },
+        error: function (err) {
+          alert("error: " + err)
+        }
+      });
     }
 
-    function getExpense(id) {
+    function setExpenseInForm(id) {
       $.ajax({
         type: "GET",
         url: "expenses/" + id,
-        dataType: 'json',
         success: function (response) {
-          $("#id").val(response.id),
-              $("#expenseDate").val(response.expenseDate),
-              $("#description").val(response.description),
-              $("#amount").val(response.amount)
+          $("#id").val(response.id);
+          $("#expenseDate").val(response.expenseDate);
+          $("#description").val(response.description);
+          $("#amount").val(response.amount);
 
           $('#saveExpense').hide();
           $('#updateExpense').show();
           $('#idfield').show();
         },
         error: function (err) {
-          alert("error: " + err)
+          alert("error from getExpense: " + err)
         }
       });
     }
@@ -102,10 +102,10 @@
           $('#saveExpense').show();
           $('#updateExpense').hide();
           $('#idfield').hide();
-          $('#expenseForm')[0].reset()
+          $('#expenseForm')[0].reset();
         },
         error: function (err) {
-          alert("error: " + err)
+          alert("error from updateExpenseBtn: " + err)
         }
       });
     }
@@ -126,6 +126,7 @@
 </head>
 
 <body>
+<jsp:include page="../navber.jsp"/>
 <div class="container">
   <h1 class="text-center">Expense List</h1>
   <div class="container mt-3">
