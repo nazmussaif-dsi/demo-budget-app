@@ -19,7 +19,9 @@
           data: {
             expenseDate: $("#expenseDate").val(),
             description: $("#description").val(),
-            amount: $("#amount").val()
+            amount: $("#amount").val(),
+            userId: 1,
+            categoryId: 1
           },
           success: function (result) {
             getAllRecord();
@@ -94,7 +96,9 @@
           id: $("#id").val(),
           expenseDate: $("#expenseDate").val(),
           description: $("#description").val(),
-          amount: $("#amount").val()
+          amount: $("#amount").val(),
+          userId: 1,
+          categoryId: 1
         },
         success: function (result) {
           getAllRecord();

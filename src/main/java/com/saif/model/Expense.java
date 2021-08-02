@@ -18,15 +18,14 @@ public class Expense {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date expenseDate;
 
   private String description;
   private Double amount;
 
-//    @ManyToOne
-//    private Category category;
-//
-//    @ManyToOne
-//    private User user;
+  @ManyToOne
+  private Category category;
+
+  @ManyToOne
+  private User user;
 }

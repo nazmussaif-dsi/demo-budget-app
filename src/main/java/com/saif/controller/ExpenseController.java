@@ -1,5 +1,6 @@
 package com.saif.controller;
 
+import com.saif.helper.dtos.ExpenseDTO;
 import com.saif.model.Expense;
 import com.saif.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
@@ -21,28 +22,28 @@ public class ExpenseController {
 
   @GetMapping("/all")
   @ResponseBody
-  public List<Expense> getAllExpenses() {
+  public List<ExpenseDTO> getAllExpenses() {
     return expenseService.getAllExpenses();
   }
 
   @GetMapping("/{id}")
   @ResponseBody
-  public Expense getExpense(@PathVariable("id") Long id) {
-    Expense expense = expenseService.getExpenseById(id);
-    return expense;
+  public ExpenseDTO getExpense(@PathVariable("id") Long id) {
+    ExpenseDTO expenseDTO = expenseService.getExpenseById(id);
+    return expenseDTO;
   }
 
   @PostMapping("/add")
   @ResponseBody
-  public String addExpense(@ModelAttribute("expense") Expense expense) {
-    expenseService.saveExpense(expense);
+  public String addExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) {
+    expenseService.saveExpense(expenseDTO);
     return "added";
   }
 
   @PostMapping("/update")
   @ResponseBody
-  public String updateExpense(@ModelAttribute("expense") Expense expense) {
-    expenseService.updateExpense(expense);
+  public String updateExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) {
+    expenseService.updateExpense(expenseDTO);
     return "updated";
   }
 
