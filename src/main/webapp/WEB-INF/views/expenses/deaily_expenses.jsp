@@ -6,11 +6,8 @@
 
   <script>
     $(document).ready(function () {
-      getAllRecord();
-
-      $('#saveExpense').show();
-      $('#updateExpense').hide();
-      $('#idfield').hide();
+      formReset();
+      getAllRecordAndSetToTable();
 
       $('#saveExpense').click(function () {
         $.ajax({
@@ -21,11 +18,12 @@
             description: $("#description").val(),
             amount: $("#amount").val(),
             userId: 1,
-            categoryId: 1
+            categoryId: $("#category").val()
           },
           success: function (result) {
-            getAllRecord();
-            $('#expenseForm')[0].reset()
+            getAllRecordAndSetToTable();
+            $('#expenseForm')[0].reset();
+            $("#expenseDate").val(new Date().toISOString().split('T')[0]);
           },
           error: function (err) {
             alert("error: " + err);
@@ -34,23 +32,62 @@
       });
     });
 
-    function getAllRecord() {
+    function formReset(){
+      $('#saveExpense').show();
+      $('#updateExpense').hide();
+      $('#idField').hide();
+
+      $('#expenseForm')[0].reset();
+      $("#expenseDate").val(new Date().toISOString().split('T')[0]);
+    }
+
+    function getAllCategoriesAndSetToForm() {
+      $.ajax({
+        type: "GET",
+        url: "api/categories/all",
+        success: function (response) {
+          $("#category > option").remove();
+          for (let i = 0; i < response.length; i++) {
+            $("#category").append(new Option(response[i].name, response[i].id));
+          }
+        },
+        error: function (err) {
+          alert("error: " + err);
+        }
+      });
+    }
+
+    function getCategoryAndSetToForm(id){
+      $.ajax({
+        type: "GET",
+        url: "api/categories/" + id,
+        success: function (response) {
+          $("#category > option").remove();
+          $("#category").append(new Option(response.name, response.id), true, true);
+        },
+        error: function (err) {
+          alert("error: " + err);
+        }
+      });
+    }
+
+    function getAllRecordAndSetToTable() {
       $.ajax({
         type: "GET",
         url: "expenses/all",
         success: function (response) {
-          $('.tr').remove();
+          $('.expenseTable_tr').remove();
           for (let i = 0; i < response.length; i++) {
             $("#expenseTable")
                 .append(
-                    '<tr class="tr">' +
+                    '<tr class="expenseTable_tr">' +
                     '<td>' + response[i].id + '</td>' +
                     '<td>' + response[i].expenseDate + '</td>' +
                     '<td>' + response[i].description + '</td>' +
                     '<td>' + response[i].amount + '</td>' +
                     '<td>' +
                     '<input type="button" class="btn btn-warning" ' +
-                    'onclick="setExpenseInForm(' + response[i].id + ')" ' +
+                    'onclick="getExpenseAndSetToForm(' + response[i].id + ')" ' +
                     'value="Edit">' +
                     '</td> ' +
                     '<td>' +
@@ -68,20 +105,22 @@
       });
     }
 
-    function setExpenseInForm(id) {
+    function getExpenseAndSetToForm(id) {
       $.ajax({
         type: "GET",
         url: "expenses/" + id,
         success: function (response) {
-          $("#id").val(response.id);
-          alert(new Date(response.expenseDate).toISOString());
+          $("#expenseId").val(response.id);
           $("#expenseDate").val(new Date(response.expenseDate).toISOString().split('T')[0]);
+
+          getCategoryAndSetToForm(response.categoryId);
+
           $("#description").val(response.description);
           $("#amount").val(response.amount);
 
           $('#saveExpense').hide();
           $('#updateExpense').show();
-          $('#idfield').show();
+          $('#idField').show();
         },
         error: function (err) {
           alert("error from getExpense: " + err);
@@ -94,20 +133,16 @@
         type: "POST",
         url: "/expenses/update",
         data: {
-          id: $("#id").val(),
+          id: $("#expenseId").val(),
           expenseDate: $("#expenseDate").val(),
           description: $("#description").val(),
           amount: $("#amount").val(),
           userId: 1,
-          categoryId: 1
+          categoryId: $("#category").val()
         },
         success: function (result) {
-          getAllRecord();
-
-          $('#saveExpense').show();
-          $('#updateExpense').hide();
-          $('#idfield').hide();
-          $('#expenseForm')[0].reset();
+          getAllRecordAndSetToTable();
+          formReset();
         },
         error: function (err) {
           alert("error from updateExpenseBtn: " + err);
@@ -120,7 +155,7 @@
         type: "DELETE",
         url: "/expenses/delete/" + id,
         success: function (response) {
-          getAllRecord();
+          getAllRecordAndSetToTable();
         },
         error: function (err) {
           alert("error: " + err);
@@ -138,12 +173,12 @@
     <div class="row">
       <div class="col-6">
         <h3>Add New Expense</h3>
-        <form id="expenseForm" name="expenseform">
-          <div class="row" id="idfield">
+        <form id="expenseForm" name="expenseForm">
+          <div class="row" id="idField">
             <div class="col">
               <div class="form-group">
-                <label for="id">ID</label>
-                <input type="text" readonly="readonly" class="form-control" id="id" name="id">
+                <label for="expenseId">ID</label>
+                <input type="text" readonly="readonly" class="form-control" id="expenseId" name="expenseId">
               </div>
             </div>
           </div>
@@ -152,7 +187,18 @@
             <div class="col">
               <div class="form-group">
                 <label for="expenseDate">Date</label>
-                <input type="date" class="form-control" id="expenseDate" name="expenseDate" placeholder="Enter Date">
+                <input type="date" class="form-control" id="expenseDate" name="expenseDate">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select class="custom-select" id="category" form="expenseForm" onfocus="getAllCategoriesAndSetToForm()">
+                  <option value="1" selected>General</option>
+                </select>
               </div>
             </div>
           </div>
