@@ -85,6 +85,7 @@
                     '<td>' + response[i].expenseDate + '</td>' +
                     '<td>' + response[i].description + '</td>' +
                     '<td>' + response[i].amount + '</td>' +
+                    '<td>' + response[i].categoryId + '</td>' +
                     '<td>' +
                     '<input type="button" class="btn btn-warning" ' +
                     'onclick="getExpenseAndSetToForm(' + response[i].id + ')" ' +
@@ -243,6 +244,7 @@
             <th scope="col">Date</th>
             <th scope="col">Description</th>
             <th scope="col">Amount</th>
+            <th scope="col">Category</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
