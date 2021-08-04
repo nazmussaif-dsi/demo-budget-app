@@ -52,7 +52,7 @@ public class ExpenseService {
 
   private Expense expenseDtoToExpense(ExpenseDTO expenseDTO) {
     Expense expense = new Expense();
-    expense.setId(expenseDTO.getUserId());
+    expense.setId(expenseDTO.getId());
     expense.setExpenseDate(expenseDTO.getExpenseDate());
     expense.setDescription(expenseDTO.getDescription());
     expense.setAmount(expenseDTO.getAmount());

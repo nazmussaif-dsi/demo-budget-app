@@ -29,8 +29,7 @@ public class ExpenseController {
   @GetMapping("/{id}")
   @ResponseBody
   public ExpenseDTO getExpense(@PathVariable("id") Long id) {
-    ExpenseDTO expenseDTO = expenseService.getExpenseById(id);
-    return expenseDTO;
+    return expenseService.getExpenseById(id);
   }
 
   @PostMapping("/add")
@@ -43,6 +42,7 @@ public class ExpenseController {
   @PostMapping("/update")
   @ResponseBody
   public String updateExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) {
+    System.out.println(expenseDTO);
     expenseService.updateExpense(expenseDTO);
     return "updated";
   }
