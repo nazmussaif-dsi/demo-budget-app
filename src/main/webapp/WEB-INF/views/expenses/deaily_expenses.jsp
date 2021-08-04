@@ -28,7 +28,7 @@
             $('#expenseForm')[0].reset()
           },
           error: function (err) {
-            alert("error: " + err)
+            alert("error: " + err);
           }
         });
       });
@@ -63,7 +63,7 @@
           }
         },
         error: function (err) {
-          alert("error: " + err)
+          alert("error: " + err);
         }
       });
     }
@@ -74,7 +74,8 @@
         url: "expenses/" + id,
         success: function (response) {
           $("#id").val(response.id);
-          $("#expenseDate").val(response.expenseDate);
+          alert(new Date(response.expenseDate).toISOString());
+          $("#expenseDate").val(new Date(response.expenseDate).toISOString().split('T')[0]);
           $("#description").val(response.description);
           $("#amount").val(response.amount);
 
@@ -83,7 +84,7 @@
           $('#idfield').show();
         },
         error: function (err) {
-          alert("error from getExpense: " + err)
+          alert("error from getExpense: " + err);
         }
       });
     }
@@ -109,7 +110,7 @@
           $('#expenseForm')[0].reset();
         },
         error: function (err) {
-          alert("error from updateExpenseBtn: " + err)
+          alert("error from updateExpenseBtn: " + err);
         }
       });
     }
@@ -122,7 +123,7 @@
           getAllRecord();
         },
         error: function (err) {
-          alert("error: " + err)
+          alert("error: " + err);
         }
       });
     }
