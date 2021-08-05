@@ -1,33 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <%@include file="../base.jsp"%>
-  <title>Expense List</title>
-</head>
-
-<body>
-<div class="container">
-  <h1 class="text-center">Expense List</h1>
-  <table class="table">
+<div class="col-6">
+  <h3>Expense Record</h3>
+  <br>
+  <table class="table table-hover">
     <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Date</th>
       <th scope="col">Description</th>
       <th scope="col">Amount</th>
+      <th scope="col">Category</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
     </thead>
-    <tbody>
-    <c:forEach items="${expenses}" var="expenses">
-      <tr>
-        <th scope="row">${expenses.id}</th>
-        <td>${expenses.expenseDate}</td>
-        <td>${expenses.description}</td>
-        <td>${expenses.amount}</td>
-      </tr>
-    </c:forEach>
+    <tbody id="expenseTable">
     </tbody>
   </table>
 </div>
-</body>
-</html>

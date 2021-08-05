@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light" id="mainNav">
+<nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top" id="mainNav">
   <div class="container">
     <a class="navbar-brand" href="#">Budget App</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
