@@ -1,5 +1,6 @@
 package com.saif.helper.dtos;
 
+import com.saif.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,5 +30,5 @@ public class ExpenseDTO {
   private Long userId;
 
   @NonNull
-  private Long categoryId;
+  private Category category;
 }

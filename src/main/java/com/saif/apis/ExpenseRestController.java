@@ -26,21 +26,18 @@ public class ExpenseRestController {
 
   @PostMapping("/add")
   @ResponseStatus(HttpStatus.CREATED)
-  public String addExpense(@RequestBody ExpenseDTO expenseDTO) {
-    expenseService.saveExpense(expenseDTO);
-    return "added";
+  public ExpenseDTO addExpense(@RequestBody ExpenseDTO expenseDTO) {
+    return expenseService.saveExpense(expenseDTO);
   }
 
   @PostMapping("/update")
-  public String updateExpense(@RequestBody ExpenseDTO expenseDTO) {
-    expenseService.updateExpense(expenseDTO);
-    return "updated";
+  public ExpenseDTO updateExpense(@RequestBody ExpenseDTO expenseDTO) {
+    return expenseService.updateExpense(expenseDTO);
   }
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public String deleteExpense(@PathVariable("id") Long id) {
+  public void deleteExpense(@PathVariable("id") Long id) {
     expenseService.deleteExpense(id);
-    return "deleted";
   }
 }

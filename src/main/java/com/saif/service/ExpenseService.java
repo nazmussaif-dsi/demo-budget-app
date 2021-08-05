@@ -16,11 +16,6 @@ import java.util.stream.Collectors;
 public class ExpenseService {
   private final ExpenseRepository expenseRepository;
   private final UserRepository userRepository;
-  private final CategoryRepository categoryRepository;
-
-  public void saveExpense(ExpenseDTO expenseDTO) {
-    expenseRepository.saveExpense(expenseDtoToExpense(expenseDTO));
-  }
 
   public ExpenseDTO getExpenseById(Long id) {
     return expenseToExpenseDTO(expenseRepository.getExpenseById(id));
@@ -37,13 +32,19 @@ public class ExpenseService {
               expense.getAmount(),
               expense.getDescription(),
               expense.getUser().getId(),
-              expense.getCategory().getId()
+              expense.getCategory()
           ))
         .collect(Collectors.toList());
   }
 
-  public void updateExpense(ExpenseDTO expenseDTO) {
+  public ExpenseDTO saveExpense(ExpenseDTO expenseDTO) {
+    expenseRepository.saveExpense(expenseDtoToExpense(expenseDTO));
+    return expenseDTO;
+  }
+
+  public ExpenseDTO updateExpense(ExpenseDTO expenseDTO) {
     expenseRepository.updateExpense(expenseDtoToExpense(expenseDTO));
+    return expenseDTO;
   }
 
   public void deleteExpense(Long id) {
@@ -57,7 +58,7 @@ public class ExpenseService {
     expense.setDescription(expenseDTO.getDescription());
     expense.setAmount(expenseDTO.getAmount());
     expense.setUser(userRepository.getUserById(expenseDTO.getUserId()));
-    expense.setCategory(categoryRepository.getCategoryById(expenseDTO.getCategoryId()));
+    expense.setCategory(expenseDTO.getCategory());
 
     return expense;
   }
@@ -69,7 +70,7 @@ public class ExpenseService {
     expenseDTO.setDescription(expense.getDescription());
     expenseDTO.setAmount(expense.getAmount());
     expenseDTO.setUserId(expense.getUser().getId());
-    expenseDTO.setCategoryId(expense.getCategory().getId());
+    expenseDTO.setCategory(expense.getCategory());
 
     return expenseDTO;
   }
