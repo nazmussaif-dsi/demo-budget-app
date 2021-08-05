@@ -36,27 +36,4 @@ public class ExpenseRepository {
   public void deleteExpense(Long id) {
     hibernateTemplate.delete(hibernateTemplate.load(Expense.class, id));
   }
-
-//    private static final List<Expense> expenseList = new ArrayList<>();
-//
-//    public void saveExpense(Expense expense) {
-//        long id = expenseList.size() + 1;
-//        expense.setId(id);
-//        expenseList.add(expense);
-//    }
-//
-//    public Expense getExpenseById(Long id) {
-//        for (Expense expense : expenseList) {
-//            if (expense.getId() == id) {
-//                return expense;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public List<Expense> getAllExpenses() {
-//        return expenseList;
-//    }
-//
-//    public void deleteExpense(Long id) { expenseList.removeIf(expense -> expense.getId() == id);}
 }

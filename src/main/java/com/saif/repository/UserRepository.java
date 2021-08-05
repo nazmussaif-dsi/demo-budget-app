@@ -36,29 +36,4 @@ public class UserRepository {
   public void deleteUser(Long id) {
     hibernateTemplate.delete(hibernateTemplate.load(User.class, id));
   }
-
-//    private static final List<User> userList = new ArrayList<>();
-//
-//    public void saveUser(User user){
-//        long id = userList.size() + 1;
-//        user.setId(id);
-//        userList.add(user);
-//    }
-//
-//    public User getUserById(Long id){
-//        for(User user : userList){
-//            if(user.getId() == id){
-//                return user;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public List<User> getAllUsers(){
-//        return userList;
-//    }
-//
-//    public void deleteUser(Long id){
-//        userList.removeIf(user -> user.getId() == id);
-//    }
 }
