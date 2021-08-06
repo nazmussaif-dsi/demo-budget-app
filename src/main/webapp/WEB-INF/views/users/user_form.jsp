@@ -21,6 +21,11 @@
                   class="form-control"/>
     </div>
 
+    <div class="mb-3">
+      <form:input path="password" placeholder="Enter password"
+                  class="form-control"/>
+    </div>
+
     <div class="text-left">
       <form:button
           class="btn btn-primary">Submit</form:button>
