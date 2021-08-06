@@ -1,13 +1,12 @@
 package com.saif.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +18,11 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false, unique = true)
   private String name;
   private String password;
   private String email;
+
+  @OneToMany
+  private List<UserRole> roles;
 }
