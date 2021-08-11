@@ -3,6 +3,7 @@
 <head>
   <meta charset="ISO-8859-1">
   <%@include file="../base.jsp" %>
+  <title>Expenses</title>
 
   <script>
     $(document).ready(function () {
