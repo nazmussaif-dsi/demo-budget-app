@@ -1,6 +1,6 @@
 package com.saif.configurations;
 
-import com.saif.service.UserSecurityService;
+import com.saif.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  private final UserSecurityService userSecurityService;
+  private final CustomUserDetailsService customUserDetailsService;
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-    auth.userDetailsService(userSecurityService).passwordEncoder(new BCryptPasswordEncoder());
+    auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
   }
 
   @Override

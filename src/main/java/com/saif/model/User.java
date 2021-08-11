@@ -23,6 +23,6 @@ public class User {
   private String password;
   private String email;
 
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER)
   private List<UserRole> roles;
 }
