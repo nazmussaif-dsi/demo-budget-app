@@ -17,7 +17,7 @@ public class CategoryController {
 
   @GetMapping
   public String showAllCategories(Model model) {
-    List<Category> categories = categoryService.getAllCategories();
+    List<Category> categories = categoryService.findAll();
     model.addAttribute("categories", categories);
     return "categories/category_list";
   }
@@ -30,19 +30,19 @@ public class CategoryController {
 
   @PostMapping("/add")
   public String addCategory(@ModelAttribute("category") Category category) {
-    categoryService.saveCategory(category);
+    categoryService.create(category);
     return "redirect:/categories";
   }
 
   @PatchMapping("/update")
   public String updateCategory(@ModelAttribute("category") Category category){
-    categoryService.updateCategory(category);
+    categoryService.update(category);
     return "redirect:/categories";
   }
 
   @DeleteMapping("/delete/{id}")
   public String deleteCategory(@PathVariable("id") Long id) {
-    categoryService.deleteCategory(id);
+    categoryService.delete(id);
     return "redirect:/categories";
   }
 }

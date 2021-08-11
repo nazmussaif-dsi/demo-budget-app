@@ -1,7 +1,7 @@
 package com.saif.controller;
 
 import com.saif.helper.dtos.ExpenseDTO;
-import com.saif.model.Expense;
+import com.saif.helper.exception.ServiceException;
 import com.saif.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,34 +23,34 @@ public class ExpenseController {
   @GetMapping("/all")
   @ResponseBody
   public List<ExpenseDTO> getAllExpenses() {
-    return expenseService.getAllExpenses();
+    return expenseService.findAll();
   }
 
   @GetMapping("/{id}")
   @ResponseBody
-  public ExpenseDTO getExpense(@PathVariable("id") Long id) {
-    return expenseService.getExpenseById(id);
+  public ExpenseDTO getExpense(@PathVariable("id") Long id) throws ServiceException {
+    return expenseService.findById(id);
   }
 
   @PostMapping("/add")
   @ResponseBody
-  public String addExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) {
-    expenseService.saveExpense(expenseDTO);
+  public String addExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) throws ServiceException{
+    expenseService.create(expenseDTO);
     return "added";
   }
 
   @PostMapping("/update")
   @ResponseBody
-  public String updateExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) {
+  public String updateExpense(@ModelAttribute("expense") ExpenseDTO expenseDTO) throws ServiceException{
     System.out.println(expenseDTO);
-    expenseService.updateExpense(expenseDTO);
+    expenseService.update(expenseDTO);
     return "updated";
   }
 
   @DeleteMapping("/delete/{id}")
   @ResponseBody
   public String deleteExpense(@PathVariable("id") Long id) {
-    expenseService.deleteExpense(id);
+    expenseService.delete(id);
     return "deleted";
   }
 }

@@ -1,6 +1,7 @@
 package com.saif.apis;
 
 import com.saif.helper.dtos.ExpenseDTO;
+import com.saif.helper.exception.ServiceException;
 import com.saif.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,29 +16,29 @@ public class ExpenseRestController {
   private final ExpenseService expenseService;
 
   @GetMapping
-  public List<ExpenseDTO> getAllExpenses() {
-    return expenseService.getAllExpenses();
+  public List<ExpenseDTO> findAll() {
+    return expenseService.findAll();
   }
 
   @GetMapping("/{id}")
-  public ExpenseDTO getExpense(@PathVariable("id") Long id) {
-    return expenseService.getExpenseById(id);
+  public ExpenseDTO findById(@PathVariable("id") Long id) throws ServiceException {
+    return expenseService.findById(id);
   }
 
   @PostMapping("/add")
   @ResponseStatus(HttpStatus.CREATED)
-  public ExpenseDTO addExpense(@RequestBody ExpenseDTO expenseDTO) {
-    return expenseService.saveExpense(expenseDTO);
+  public ExpenseDTO create(@RequestBody ExpenseDTO expenseDTO) throws ServiceException{
+    return expenseService.create(expenseDTO);
   }
 
   @PostMapping("/update")
-  public ExpenseDTO updateExpense(@RequestBody ExpenseDTO expenseDTO) {
-    return expenseService.updateExpense(expenseDTO);
+  public ExpenseDTO update(@RequestBody ExpenseDTO expenseDTO) throws ServiceException{
+    return expenseService.update(expenseDTO);
   }
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteExpense(@PathVariable("id") Long id) {
-    expenseService.deleteExpense(id);
+  public void delete(@PathVariable("id") Long id) {
+    expenseService.delete(id);
   }
 }

@@ -1,8 +1,10 @@
 package com.saif.service;
 
+import com.saif.helper.exception.ServiceException;
 import com.saif.model.User;
 import com.saif.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,23 +14,27 @@ import java.util.List;
 public class UserService {
   private final UserRepository userRepository;
 
-  public void saveUser(User user) {
-    userRepository.saveUser(user);
+  public User create(User user) {
+    return userRepository.save(user);
   }
 
-  public User getUserById(Long id) {
-    return userRepository.getUserById(id);
+  public User findById(Long id) throws ServiceException {
+    return userRepository.findById(id)
+        .orElseThrow(() -> new ServiceException(
+            "User not found with ID: " + id,
+            HttpStatus.NOT_FOUND
+        ));
   }
 
-  public List<User> getAllUsers() {
-    return userRepository.getAllUsers();
+  public List<User> findAll() {
+    return userRepository.findAll();
   }
 
-  public void updateUser(User user) {
-    userRepository.updateUser(user);
+  public User update(User user) {
+    return userRepository.save(user);
   }
 
-  public void deleteUser(Long id) {
-    userRepository.deleteUser(id);
+  public void delete(Long id) {
+    userRepository.deleteById(id);
   }
 }

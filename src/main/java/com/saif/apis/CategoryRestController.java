@@ -1,5 +1,6 @@
 package com.saif.apis;
 
+import com.saif.helper.exception.ServiceException;
 import com.saif.model.Category;
 import com.saif.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -15,31 +16,31 @@ public class CategoryRestController {
   private final CategoryService categoryService;
 
   @GetMapping
-  public List<Category> getAllCategories(){
-    return categoryService.getAllCategories();
+  public List<Category> findAll(){
+    return categoryService.findAll();
   }
 
   @GetMapping("/{id}")
-  public Category getCategory(@PathVariable("id") Long id){
-    return categoryService.getCategoryById(id);
+  public Category findById(@PathVariable("id") Long id) throws ServiceException {
+    return categoryService.findById(id);
   }
 
   @PostMapping("/add")
   @ResponseStatus(HttpStatus.CREATED)
-  public String addCategory(@RequestBody Category category) {
-    categoryService.saveCategory(category);
+  public String create(@RequestBody Category category) {
+    categoryService.create(category);
     return "added";
   }
 
   @PostMapping("/update")
-  public String updateCategory(@RequestBody Category category){
-    categoryService.updateCategory(category);
+  public String update(@RequestBody Category category){
+    categoryService.update(category);
     return "updated";
   }
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteCategory(@PathVariable("id") Long id) {
-    categoryService.deleteCategory(id);
+  public void delete(@PathVariable("id") Long id) {
+    categoryService.delete(id);
   }
 }

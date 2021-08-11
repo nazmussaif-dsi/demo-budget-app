@@ -1,5 +1,6 @@
 package com.saif.controller;
 
+import com.saif.helper.exception.ServiceException;
 import com.saif.model.User;
 import com.saif.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +18,14 @@ public class UserController {
 
   @GetMapping
   public String showAllUsers(Model model) {
-    List<User> users = userService.getAllUsers();
+    List<User> users = userService.findAll();
     model.addAttribute("users", users);
     return "users/user_list";
   }
 
   @GetMapping("/{id}")
-  public String showUser(@PathVariable("id") Long id, Model model) {
-    User user = userService.getUserById(id);
+  public String showUser(@PathVariable("id") Long id, Model model) throws ServiceException{
+    User user = userService.findById(id);
     model.addAttribute("user", user);
     return "users/user_details";
   }
@@ -37,19 +38,19 @@ public class UserController {
 
   @PostMapping("/add")
   public String addUser(@ModelAttribute("user") User user) {
-    userService.saveUser(user);
+    userService.create(user);
     return "redirect:/users";
   }
 
   @PatchMapping("/update")
   public String updateUser(@ModelAttribute("user") User user){
-    userService.updateUser(user);
+    userService.update(user);
     return "redirect:/users";
   }
 
   @DeleteMapping("/delete/{id}")
   public String deleteUser(@PathVariable("id") Long id) {
-    userService.deleteUser(id);
+    userService.delete(id);
     return "redirect:/users";
   }
 }
