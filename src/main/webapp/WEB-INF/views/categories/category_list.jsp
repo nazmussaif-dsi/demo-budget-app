@@ -3,6 +3,22 @@
 <head>
   <%@include file="../base.jsp"%>
   <title>Categories</title>
+
+  <script>
+    function deleteCategoryBtn(id) {
+      $.ajax({
+        type: "DELETE",
+        url: "api/categories/" + id,
+        success: function (response) {
+          location.reload();
+        },
+        error: function (err) {
+          console.log(err);
+          alert("error from deleteCategoryBtn: " + err);
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -15,6 +31,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Category</th>
+      <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -22,6 +39,9 @@
       <tr>
         <th scope="row">${categories.id}</th>
         <td>${categories.name}</td>
+        <td>
+          <button class="btn btn-danger" onclick="deleteCategoryBtn(${categories.id})" value="Delete">Delete</button>
+        </td>
       </tr>
     </c:forEach>
     </tbody>

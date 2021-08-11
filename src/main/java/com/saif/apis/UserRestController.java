@@ -39,8 +39,7 @@ public class UserRestController {
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public String deleteUser(@PathVariable("id") Long id) {
+  public void deleteUser(@PathVariable("id") Long id) {
     userService.deleteUser(id);
-    return "deleted";
   }
 }

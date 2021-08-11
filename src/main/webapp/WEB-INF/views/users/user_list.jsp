@@ -3,6 +3,22 @@
 <head>
   <%@include file="../base.jsp"%>
   <title>User List</title>
+
+  <script>
+    function deleteUserBtn(id) {
+      $.ajax({
+        type: "DELETE",
+        url: "api/users/" + id,
+        success: function (response) {
+          location.reload();
+        },
+        error: function (err) {
+          console.log(err);
+          alert("error from deleteUserBtn: " + err);
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -16,6 +32,7 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +41,9 @@
         <th scope="row">${user.id}</th>
         <td>${user.name}</td>
         <td>${user.email}</td>
+        <td>
+          <button class="btn btn-danger" onclick="deleteUserBtn(${user.id})" value="Delete">Delete</button>
+        </td>
       </tr>
     </c:forEach>
     </tbody>

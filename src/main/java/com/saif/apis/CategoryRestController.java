@@ -39,8 +39,7 @@ public class CategoryRestController {
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public String deleteCategory(@PathVariable("id") Long id) {
+  public void deleteCategory(@PathVariable("id") Long id) {
     categoryService.deleteCategory(id);
-    return "deleted";
   }
 }
