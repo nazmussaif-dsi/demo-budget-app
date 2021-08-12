@@ -135,7 +135,7 @@
     function editExpenseBtn(id) {
       $.ajax({
         type: "GET",
-        url: "expenses/" + id,
+        url: "api/expenses/" + id,
         success: function (response) {
           $("#expenseId").val(response.id);
           $("#expenseDate").val(new Date(response.expenseDate).toISOString().split('T')[0]);
@@ -161,7 +161,7 @@
     function deleteExpenseBtn(id) {
       $.ajax({
         type: "DELETE",
-        url: "/expenses/delete/" + id,
+        url: "api/expenses/" + id,
         success: function (response) {
           resetTable();
         },
