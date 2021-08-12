@@ -15,9 +15,9 @@ import java.util.List;
 public class ExpenseRestController {
   private final ExpenseService expenseService;
 
-  @GetMapping
-  public List<ExpenseDTO> findAll() {
-    return expenseService.findAll();
+  @GetMapping("user/{user_id}")
+  public List<ExpenseDTO> findAllByUserId(@PathVariable("user_id") Long userId) {
+    return expenseService.findAllByUserId(userId);
   }
 
   @GetMapping("/{id}")

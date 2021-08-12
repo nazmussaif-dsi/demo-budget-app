@@ -44,7 +44,7 @@
     function resetTable() {
       $.ajax({
         type: "GET",
-        url: "expenses/all",
+        url: "api/expenses/user/" + ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.user.id},
         success: function (response) {
           $('.expenseTable_tr').remove();
           for (let i = 0; i < response.length; i++) {

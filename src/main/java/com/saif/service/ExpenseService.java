@@ -27,9 +27,10 @@ public class ExpenseService {
     );
   }
 
-  public List<ExpenseDTO> findAll() {
+  public List<ExpenseDTO> findAllByUserId(Long userId) {
     return expenseRepository
-        .findAll()
+        .findByUser_Id(userId)
+//        .findAll()
         .stream()
         .map((Expense expense) ->
             new ExpenseDTO(

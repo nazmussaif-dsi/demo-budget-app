@@ -20,10 +20,10 @@ public class ExpenseController {
     return "expenses/deaily_expenses";
   }
 
-  @GetMapping("/all")
+  @GetMapping("/all/{user_id}")
   @ResponseBody
-  public List<ExpenseDTO> getAllExpenses() {
-    return expenseService.findAll();
+  public List<ExpenseDTO> getAllExpenses(@PathVariable("user_id") Long id) {
+    return expenseService.findAllByUserId(id);
   }
 
   @GetMapping("/{id}")
