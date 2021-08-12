@@ -1,5 +1,6 @@
 <div class="col-6">
-  <h3>Add New Expense</h3>
+  <h3 id="addExpenseTitle">Add New Expense</h3>
+  <h3 id="updateExpenseTitle">Update Expense</h3>
   <form id="expenseForm" name="expenseForm">
     <div class="row" id="idField">
       <div class="col">
@@ -50,11 +51,14 @@
 
     <div class="row">
       <div class="col">
-        <button type="button" id="saveExpense" class="btn btn-primary" onclick="saveExpenseBtn()">
+        <button type="button" id="saveExpenseBtn" class="btn btn-primary" onclick="saveExpense()">
           Submit
         </button>
-        <button type="button" id="updateExpense" class="btn btn-primary" onclick="updateExpenseBtn()" >
+        <button type="button" id="updateExpenseBtn" class="btn btn-primary" onclick="updateExpense()" >
           Update
+        </button>
+        <button type="button" id="resetFormBtn" class="btn btn-danger" onclick="resetForm()" >
+          Reset Form
         </button>
       </div>
     </div>

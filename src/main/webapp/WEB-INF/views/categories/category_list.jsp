@@ -35,9 +35,9 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${categories}" var="categories">
+    <c:forEach items="${categories}" var="categories" varStatus="counter">
       <tr>
-        <th scope="row">${categories.id}</th>
+        <th scope="row">${counter.count}</th>
         <td>${categories.name}</td>
         <td>
           <button class="btn btn-danger" onclick="deleteCategoryBtn(${categories.id})" value="Delete">Delete</button>

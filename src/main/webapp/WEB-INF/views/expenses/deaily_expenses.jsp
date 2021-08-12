@@ -11,14 +11,7 @@
       resetForm();
     });
 
-    function resetForm() {
-      $('#saveExpense').show();
-      $('#updateExpense').hide();
-      $('#idField').hide();
-
-      $('#expenseForm')[0].reset();
-      $("#expenseDate").val(new Date().toISOString().split('T')[0]);
-
+    function getCategories(){
       $.ajax({
         type: "GET",
         url: "api/categories",
@@ -29,9 +22,23 @@
           }
         },
         error: function (err) {
-          alert("error: " + err);
+          console.log(err);
+          alert("error form getCategories");
         }
       });
+    }
+
+    function resetForm() {
+      $('#addExpenseTitle').show();
+      $('#updateExpenseTitle').hide();
+      $('#saveExpenseBtn').show();
+      $('#updateExpenseBtn').hide();
+      $('#idField').hide();
+
+      $('#expenseForm')[0].reset();
+      $("#expenseDate").val(new Date().toISOString().split('T')[0]);
+
+      getCategories();
     }
 
     function resetTable() {
@@ -44,7 +51,7 @@
             $("#expenseTable")
                 .append(
                     '<tr class="expenseTable_tr">' +
-                    '<td>' + response[i].id + '</td>' +
+                    '<td>' + (i+1) + '</td>' +
                     '<td>' + response[i].expenseDate + '</td>' +
                     '<td>' + response[i].description + '</td>' +
                     '<td>' + response[i].amount + '</td>' +
@@ -64,12 +71,13 @@
           }
         },
         error: function (err) {
-          alert("error from getAllRecordAndSetToTable: " + err);
+          console.log(err);
+          alert("error from getAllRecordAndSetToTable");
         }
       });
     }
 
-    function saveExpenseBtn() {
+    function saveExpense() {
       $.ajax({
         type: "POST",
         url: "api/expenses/add",
@@ -91,33 +99,12 @@
         },
         error: function (err) {
           console.log(err);
-          alert("error from saveExpenseBtn: " + err);
+          alert("error from saveExpense()");
         }
       });
     }
 
-    function editExpenseBtn(id) {
-      $.ajax({
-        type: "GET",
-        url: "expenses/" + id,
-        success: function (response) {
-          $("#expenseId").val(response.id);
-          $("#expenseDate").val(new Date(response.expenseDate).toISOString().split('T')[0]);
-          $("#category").val(response.category.id);
-          $("#description").val(response.description);
-          $("#amount").val(response.amount);
-
-          $('#saveExpense').hide();
-          $('#updateExpense').show();
-          $('#idField').show();
-        },
-        error: function (err) {
-          alert("error from editExpenseBtn: " + err);
-        }
-      });
-    }
-
-    function updateExpenseBtn() {
+    function updateExpense() {
       $.ajax({
         type: "POST",
         url: "api/expenses/update",
@@ -139,7 +126,34 @@
           resetForm();
         },
         error: function (err) {
-          alert("error from updateExpenseBtn: " + err);
+          console.log(err);
+          alert("error from updateExpense()");
+        }
+      });
+    }
+
+    function editExpenseBtn(id) {
+      $.ajax({
+        type: "GET",
+        url: "expenses/" + id,
+        success: function (response) {
+          $("#expenseId").val(response.id);
+          $("#expenseDate").val(new Date(response.expenseDate).toISOString().split('T')[0]);
+          $("#category").val(response.category.id);
+          $("#description").val(response.description);
+          $("#amount").val(response.amount);
+
+          $('#saveExpenseBtn').hide();
+          $('#updateExpenseBtn').show();
+
+          $('#addExpenseTitle').hide();
+          $('#updateExpenseTitle').show();
+
+          $('#idField').show();
+        },
+        error: function (err) {
+          console.log(err);
+          alert("error from editExpenseBtn");
         }
       });
     }
@@ -152,7 +166,8 @@
           resetTable();
         },
         error: function (err) {
-          alert("error: " + err);
+          console.log(err);
+          alert("error form deleteExpenseBtn");
         }
       });
     }
@@ -160,13 +175,13 @@
 </head>
 
 <body>
-<jsp:include page="../navber.jsp"/>
+<%@include file="../navber.jsp" %>
 <div class="container">
   <h1 class="text-center">Expense List</h1>
   <div class="container mt-3">
     <div class="row">
-      <jsp:include page="expense_form.jsp"/>
-      <jsp:include page="expense_list.jsp"/>
+      <%@include file="expense_form.jsp" %>
+      <%@include file="expense_list.jsp" %>
     </div>
   </div>
 </div>

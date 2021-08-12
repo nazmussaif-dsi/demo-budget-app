@@ -30,15 +30,17 @@
     <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">User ID</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${users}" var="user">
+    <c:forEach items="${users}" var="user" varStatus="counter">
       <tr>
-        <th scope="row">${user.id}</th>
+        <th scope="row">${counter.count}</th>
+        <td>${user.id}</td>
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>
