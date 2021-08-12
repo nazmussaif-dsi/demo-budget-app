@@ -87,7 +87,7 @@
           expenseDate: $("#expenseDate").val(),
           description: $("#description").val(),
           amount: $("#amount").val(),
-          userId: 1,
+          userId: ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.user.id},
           category: {
             id: $("#category").val(),
             name: $("#category option:selected").text()
@@ -115,7 +115,7 @@
           expenseDate: $("#expenseDate").val(),
           description: $("#description").val(),
           amount: $("#amount").val(),
-          userId: 1,
+          userId: ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.user.id},
           category: {
             id: $("#category").val(),
             name: $("#category option:selected").text()
