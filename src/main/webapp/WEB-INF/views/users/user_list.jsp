@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<jsp:include page="../navber.jsp"/>
+<%@include file="../navber.jsp"%>
 <div class="container">
   <h1 class="text-center">User List</h1>
   <a href="/users/add" class="btn btn-info" role="button">Add new User</a>

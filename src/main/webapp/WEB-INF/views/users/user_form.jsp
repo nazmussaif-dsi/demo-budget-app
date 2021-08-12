@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<jsp:include page="../navber.jsp"/>
+<%@include file="../navber.jsp"%>
 <div class="container">
   <h1 class="text-center">Add New User</h1>
   <form:form action="/users/add" method="post" modelAttribute="user">
